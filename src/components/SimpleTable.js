@@ -23,15 +23,11 @@ const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundImage: "linear-gradient(lightblue, white)", /* Standard syntax (must be last) */
     color: "#043D67",
+    fontSize: "17px",
   },
   body: {
+    color: "444444",
     fontSize: 15,
-    // background: "url(/assets/background.jpg) no-repeat center center fixed",
-
-    // backgroundColor: "rgba(253, 246, 246, 0.6)",
-    // filter: "url(/assets/background.jpg) no-repeat center center fixed",
-    // color: '#444444',
-    // height: "65px",
   },
 }))(TableCell);
 
@@ -44,6 +40,7 @@ const StyledTableRow = withStyles((theme) => ({
   // },
   root: 
     {
+      // fontSize: "33px",
       // borderCollapse: "separate",
       // borderSpacing: "0 15px",
       // backgroundColor: "red",
@@ -143,46 +140,50 @@ export default function SimpleTable() {
         <Toolbar id="tableMenu"
         style={{color: 'white'}}
           >
-          <IconButton aria-label="delete">
+          
+        <IconButton aria-label="delete" style={{color: "white"}}>
             <RefreshIcon />
-          </IconButton>
+        </IconButton>
     
+  
+      <div style={{marginLeft: 'auto'}}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedA}
+                onChange={handleChange}
+                name="checkedA"
+                color="primary"
+              />
+            }
+            label="LAND SUCCESS"
+          />
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.checkedA}
-              onChange={handleChange}
-              name="checkedA"
-              color="primary"
-            />
-          }
-          label="LAND SUCCESS"
-        />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedB}
+                onChange={handleChange}
+                name="checkedB"
+                color="primary"
+              />
+            }
+            label="REUSED"
+          />
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.checkedB}
-              onChange={handleChange}
-              name="checkedB"
-              color="primary"
-            />
-          }
-          label="REUSED"
-        />
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.checkedC}
+                onChange={handleChange}
+                name="checkedC"
+                color="primary"
+              />
+            }
+            label="WITH REDDIT"
+          />
+        </div>
 
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={state.checkedC}
-              onChange={handleChange}
-              name="checkedC"
-              color="primary"
-            />
-          }
-          label="WITH REDDIT"
-        />
 
         </Toolbar>
       <Table 
@@ -208,20 +209,16 @@ export default function SimpleTable() {
         <TableBody>
           {launches.map((row) => (
             <StyledTableRow key={row.name} id="tableRow" >
-              <StyledTableCell component="th" scope="row" 
-              // style={{borderRadius: "20px 0px 0px 20px"}}
-              >
-                {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.name}</StyledTableCell>
+              <StyledTableCell component="th" scope="row" style={{borderRadius: "20px 0px 0px 20px"}}>{row.name}</StyledTableCell>
+              <StyledTableCell align="right" className="tableCell">{row.name}</StyledTableCell>
               <StyledTableCell align="right">{row.fat}</StyledTableCell>
               <StyledTableCell align="right">{row.carbs}</StyledTableCell>
               <StyledTableCell align="right">{row.protein}</StyledTableCell>
               <StyledTableCell align="right">{row.protein}</StyledTableCell>
               <StyledTableCell align="right" 
-              // style={{borderRadius: "0px 20px 20px 0px"}}
+              style={{borderRadius: "0px 20px 20px 0px"}}
               >
-                <IconButton aria-label="delete" target="_blank" href="https://johnseyfert.com/">
+                <IconButton aria-label="delete" target="_blank" href="https://johnseyfert.com/" style={{color: '#13A2E8'}}>
                   <LinkIcon />
                 </IconButton>
               </StyledTableCell>
