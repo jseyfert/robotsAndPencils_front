@@ -1,6 +1,5 @@
-// import React from 'react';
-import React, { useState } from 'react';
-// import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,12 +11,10 @@ import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
-import RefreshIcon from '@material-ui/icons/Refresh';
 import LinkIcon from '@material-ui/icons/Link';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import { ReactComponent as Logo } from '../refresh.svg';
 // import Client from "../Client";
-
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -50,26 +47,26 @@ const StyledTableRow = withStyles((theme) => ({
     },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
 
-const launches = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 24, 4.0),
-  createData('Eclair', 262, 16.0, 24, 6.0, 24, 4.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
-];
+// const launches = [
+//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0, 24, 4.0),
+//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3, 24, 4.0),
+//   createData('Eclair', 262, 16.0, 24, 6.0, 24, 4.0),
+//   createData('Cupcake', 305, 3.7, 67, 4.3, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+//   createData('Gingerbread', 356, 16.0, 49, 3.9, 24, 4.0),
+// ];
 
 const useStyles = makeStyles({
   table: {
@@ -77,7 +74,10 @@ const useStyles = makeStyles({
   },
 });
 
-
+// var timestamp = moment.unix(1143239400);
+// // var timestamp2 = moment.unix(1143239400);
+// console.log( 'here====', moment.unix(1143239400).format('l') );
+// // console.log( 'here2====', timestamp2.toDate() );
 
 export default function SimpleTable() {
   const classes = useStyles();
@@ -87,21 +87,22 @@ export default function SimpleTable() {
     checkedC: true,
   });
 
-  // const [launches, setLaunches] = useState([
-  //   { name: 'Learn Hooks', name2: 'name2' }
-  // ]);
+  const [launches, setLaunches] = useState([
+    { name: 'Learn Hooks', name2: 'name2' }
+  ]);
 
-  // async function fetchData() {
-  //   const res = await fetch("https://robots-and-pencils-john.herokuapp.com/getLaunches");
-  //   res
-  //     .json()
-  //     .then(res => setLaunches(res))
-  //     // .then(res => setPlanets(res))
-  //     // .catch(err => setErrors(err));
-  // }
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  async function fetchData() {
+    const res = await fetch("https://robots-and-pencils-john.herokuapp.com/getLaunches");
+    res
+      .json()
+      .then(res => setLaunches(res))
+      // .then(res => setPlanets(res))
+      // .catch(err => setErrors(err));
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -142,8 +143,15 @@ export default function SimpleTable() {
           >
           
         <IconButton aria-label="delete" style={{color: "white"}}>
-            <RefreshIcon />
+          <Logo  style={{
+            border: "2px solid white",
+            borderRadius: "50%",
+            fill: "white",
+            height: "36px",
+            width: "36px",
+          }}/>
         </IconButton>
+
     
   
       <div style={{marginLeft: 'auto'}}>
@@ -207,20 +215,29 @@ export default function SimpleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
+          {/* {console.log(launches)} */}
+          
           {launches.map((row) => (
-            <StyledTableRow key={row.name} id="tableRow" >
-              <StyledTableCell component="th" scope="row" style={{borderRadius: "20px 0px 0px 20px"}}>{row.name}</StyledTableCell>
-              <StyledTableCell align="right" className="tableCell">{row.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+            <StyledTableRow key={row._id} id="tableRow" >
+
+              <StyledTableCell component="th" scope="row" style={{borderRadius: "20px 0px 0px 20px"}}>
+                
+                <img src={row.mission_patch_small} alt="patch" style={{height: "36px"}} />
+                </StyledTableCell>
+
+              <StyledTableCell align="right" className="tableCell">{row.rocket_name}</StyledTableCell>
+              <StyledTableCell align="right">{row.rocket_type}</StyledTableCell>
+              <StyledTableCell align="right">
+                {moment.unix(row.launch_date_unix).format('l')}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.details}</StyledTableCell>
+              <StyledTableCell align="right">{row.flight_number}</StyledTableCell>
               <StyledTableCell align="right" 
               style={{borderRadius: "0px 20px 20px 0px"}}
               >
-                <IconButton aria-label="delete" target="_blank" href="https://johnseyfert.com/" style={{color: '#13A2E8'}}>
+                {row.article_link && <IconButton aria-label="delete" target="_blank" href={row.article_link} style={{color: '#13A2E8'}}>
                   <LinkIcon />
-                </IconButton>
+                </IconButton>}
               </StyledTableCell>
             </StyledTableRow>
           ))}
